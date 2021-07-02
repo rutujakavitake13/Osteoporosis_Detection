@@ -1,0 +1,118 @@
+.u-section-1 {
+  background-image: linear-gradient(0deg, rgba(64,64,64,0.2), rgba(64,64,64,0.2)), url('images/hero-bg.jpg');
+  background-position: 50% 50%;
+}
+
+.u-section-1 .u-sheet-1 {
+  min-height: 800px;
+}
+
+.u-section-1 .u-text-1 {
+  font-family: Raleway;
+  font-size: 4.0625rem;
+  margin: 306px 158px 0 128px;
+}
+
+.u-section-1 .u-text-2 {
+  font-weight: 600;
+  font-size: 1.5625rem;
+  margin: 13px 65px 0;
+}
+
+.u-section-1 .u-btn-1 {
+  background-image: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-style: none;
+  font-size: 1.25rem;
+  margin: 20px auto 60px 432px;
+  padding: 12px 59px 14px 58px;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 660px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-right: 15px;
+    margin-left: 71px;
+  }
+
+  .u-section-1 .u-text-2 {
+    margin-right: 28px;
+    margin-left: 15px;
+  }
+
+  .u-section-1 .u-btn-1 {
+    margin-left: 332px;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 760px;
+  }
+
+  .u-section-1 .u-text-1 {
+    width: auto;
+    margin-top: 223px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .u-section-1 .u-text-2 {
+    width: 510px;
+    margin-top: 30px;
+    margin-right: 105px;
+    margin-left: 105px;
+  }
+
+  .u-section-1 .u-btn-1 {
+    margin-top: 15px;
+    margin-left: 222px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 889px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-top: 300px;
+  }
+
+  .u-section-1 .u-text-2 {
+    width: auto;
+    margin-top: 22px;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  .u-section-1 .u-btn-1 {
+    margin-left: 117px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 977px;
+  }
+
+  .u-section-1 .u-text-1 {
+    font-size: 2.25rem;
+    margin-top: 329px;
+  }
+
+  .u-section-1 .u-text-2 {
+    margin-top: 28px;
+    margin-left: 22px;
+    margin-right: 22px;
+  }
+
+  .u-section-1 .u-btn-1 {
+    margin-top: 21px;
+    margin-left: 22px;
+  }
+}
