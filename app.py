@@ -192,7 +192,8 @@ def team():
 # testing code for resnet
 def resnet():
     # #Prediction of a random test image
-    model = load_model('./models/Two_ResNet50_opg_images.h5')
+    Model_path = './models/Two_ResNet50_opg_images.h5'
+    model = load_model(Model_path)
     img_height, img_width = (224, 224)
     train_datagen = ImageDataGenerator(preprocessing_function=preprocess_input,
                                        shear_range=0.2,
