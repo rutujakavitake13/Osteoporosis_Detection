@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sn
 import cv2
-
+from PIL import Image, ImageDraw, ImageFont
 from flask import Flask, flash, request, redirect, render_template, abort
 from werkzeug.utils import secure_filename
 import os
@@ -16,7 +16,8 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.resnet50 import preprocess_input
 import matplotlib.pyplot as plt
-from keras.applications.vgg16 import preprocess_input
+
+# from keras.applications.vgg16 import preprocess_input
 
 # flask constructor
 # create an app instance
@@ -192,8 +193,7 @@ def team():
 # testing code for resnet
 def resnet():
     # #Prediction of a random test image
-    Model_path = './models/Two_ResNet50_opg_images.h5'
-    model = load_model(Model_path)
+    model = load_model('./models/Two_ResNet50_opg_images.h5')
     img_height, img_width = (224, 224)
     train_datagen = ImageDataGenerator(preprocessing_function=preprocess_input,
                                        shear_range=0.2,
@@ -208,7 +208,7 @@ def resnet():
     )
 
     res_loss, res_accu = model.evaluate(test_generator, verbose=2)
-    res_accu = res_accu * 100
+    res_accu = "{:.2f}".format((res_accu * 100))
     print(res_accu)
 
     # prediction conversion from '0,1,2' to 'C1,C2,C3'
@@ -235,6 +235,7 @@ def resnet():
     cfm_plot1 = sn.heatmap(confusion_matrix, cmap='YlGn', annot=True, fmt='d', cbar=False)
     # plt.show()
     cfm_plot1.figure.savefig(os.path.join('./static/css/images', "cfm_r.png"))
+    accuracy_print(os.path.join('./static/css/images', "cfm_r.png"), res_accu)
     return (predicted_resnet), res_accu
 
 
@@ -278,11 +279,24 @@ def vgg():
 
     cfm_plot = sn.heatmap(df_cfm, annot=True, fmt='d', cbar=False)
     cfm_plot.figure.savefig(os.path.join('./static/css/images', "cfm.png"))
-    vgg_accu = format((np.diagonal(cnf_matrix).sum() / cnf_matrix.sum().sum() * 100))
-    print(vgg_accu)
+    vgg_accu = "{:.2f}".format((np.diagonal(cnf_matrix).sum() / cnf_matrix.sum().sum() * 100))
+    accuracy_print(os.path.join('./static/css/images', "cfm.png"), vgg_accu)
+
 
     return predicted_vgg, vgg_accu
 
+def accuracy_print(path, accuracy):
+    image = Image.open(path)
+    bottom = 100
+    width, height = image.size
+    new_height = height + bottom
+    result = Image.new(image.mode, (width, new_height), (255, 255, 255))
+    result.paste(image, (0, 0))
+    Acc_vgg = 'Accuracy = ' + str(accuracy) + '%'
+    txt = ImageDraw.Draw(result)
+    font = ImageFont.truetype('arial.ttf', 32)
+    txt.text(((width / 3) - 20, height + 20), Acc_vgg, fill=(0, 0, 0), font=font)
+    result.save(path)
 
 # create an app instance
 if __name__ == '__main__':
