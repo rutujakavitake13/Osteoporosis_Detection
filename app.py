@@ -16,6 +16,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.resnet50 import preprocess_input
 import matplotlib.pyplot as plt
+import tensorflow as tf
 
 # from keras.applications.vgg16 import preprocess_input
 
@@ -193,7 +194,9 @@ def team():
 # testing code for resnet
 def resnet():
     # #Prediction of a random test image
-    model = load_model('./models/Two_ResNet50_opg_images.h5')
+    model_r = load_model('./models/Two_ResNet50_opg_images.h5')
+    tf.saved_model.save(model_r, './models/resnet50')
+    model = load_model('./models/resnet50')
     img_height, img_width = (224, 224)
     train_datagen = ImageDataGenerator(preprocessing_function=preprocess_input,
                                        shear_range=0.2,
@@ -241,8 +244,10 @@ def resnet():
 
 # testing for vgg16
 def vgg():
-    model1 = load_model('./models/model_vgg16.h5')
-
+    
+    model_v = load_model('./models/model_vgg16.h5')
+    tf.saved_model.save(model_v, './models/vgg16')
+    model1 = load_model('./models/vgg16')
     test_datagen = ImageDataGenerator(rescale=1. / 255)
     test_set = test_datagen.flow_from_directory('./uploads',
                                                 target_size=(224, 224),
