@@ -194,9 +194,8 @@ def team():
 # testing code for resnet
 def resnet():
     # #Prediction of a random test image
-    model_r = load_model('./models/Two_ResNet50_opg_images.h5')
-    tf.saved_model.save(model_r, './models/resnet50')
-    model = load_model('./models/resnet50')
+    model = tf.keras.models.load_model('./models/Two_ResNet50_opg_images.h5')
+    
     img_height, img_width = (224, 224)
     train_datagen = ImageDataGenerator(preprocessing_function=preprocess_input,
                                        shear_range=0.2,
